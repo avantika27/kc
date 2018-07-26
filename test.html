@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<title>Kriger Campus</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style2.css">
+<!--theme-->
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<!--font-->
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="style.css">
+
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD9Um_Z_BUxXOQkr4kyUpH72PYfBeV20yY",
+    authDomain: "kriger-website.firebaseapp.com",
+    databaseURL: "https://kriger-website.firebaseio.com",
+    projectId: "kriger-website",
+    storageBucket: "kriger-website.appspot.com",
+    messagingSenderId: "246030514172"
+  };
+  firebase.initializeApp(config);
+</script>
+
+
+<script>
+   var database= firebase.database();
+   var ref = firebase.database().ref("Posts");
+   
+
+
+ { 
+ ref.orderByChild("timestamp").limitToFirst(10).on("child_added", function(snapshot) {
+  console.log(snapshot.key + " was " + snapshot.val().text + snapshot.val().timestamp + snapshot.val().author + snapshot.val().count_like + "<br/>");
+})
+};
+ /* .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+	   element_data_key_mapping = {
+	    "author": "username" ,
+		
+         
+		"text":"posttext",
+		
+		"timestamp":"time",
+		"count_comment":"comment",
+		"count_like":"likecount",
+		"document_id":"ch",
+		
+		
+	  };
+	    
+      var key = childSnapshot.key;
+      var value = childSnapshot.val();              // childData will be the actual contents of the child
+	  
+	  
+	 if (key =='author' || key == 'text' || key =='timestamp' || key== 'count_like' || key=='count_comment' || key=='document_id' )
+	  {
+	  document.getElementById(element_data_key_mapping[key]).innerHTML = value;
+	  }
+	
+	
+  });
+ });
+ }; */
+ </script>
+
+
+
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+
+</style>
+<body class="w3-theme-l5">
+
+<!--header-->
+<div class="header">
+<a href="index.html"> <img  src="logo25.png" ></a>
+  <a href="#default" class="logo">Kriger Campus <hr><h4 style="display:inline;">   India's Education Network</h4> </a>
+<form action="/action_page.php">
+  <input type="text" placeholder="Search..">
+<button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  <div class="header-right">
+    <a class="active" href="#home">Posts</a>
+    <a href="#contact">Profiles</a>
+    
+  </div>
+</div>
+<div style="padding-left:20px">
+ 
+</div>
+<!--oage content -->
+
+<p id="username">name</p>
+<p id="posttext">post</p>
+<p id="time">time</p>
+<p id="comment">comment</p>
+<p id="likecount">like</p>
+<p id="username1">name1</p>
+<p id="ch">name</p>
+
+      
+      
+      
+      
+     
+
+
+
+
+
+
+ 
+<script>
+
+
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+</body>
+</html> 

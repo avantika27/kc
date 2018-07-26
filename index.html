@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html>
+<title>Kriger Campus</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style2.css">
+<!--theme-->
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<!--font-->
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="style.css">
+
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyD9Um_Z_BUxXOQkr4kyUpH72PYfBeV20yY",
+    authDomain: "kriger-website.firebaseapp.com",
+    databaseURL: "https://kriger-website.firebaseio.com",
+    projectId: "kriger-website",
+    storageBucket: "kriger-website.appspot.com",
+    messagingSenderId: "246030514172"
+  };
+  firebase.initializeApp(config);
+</script>
+
+
+
+<script>
+
+   var database= firebase.database();
+   var userDataRef = firebase.database().ref("Posts/-LEQBhJuwuJ9SlLu9H4L").orderByKey();
+ window.onload = function(e){ 
+userDataRef.once("value")
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+	   element_data_key_mapping = {
+	    "author": "username",
+		"text": "posttext",
+		"count_comment":"com",
+		"count_like":"likecount",
+		"timestamp":"time"
+		
+		
+		
+	 
+	  };
+	  
+	  
+      var key = childSnapshot.key;
+      var value = childSnapshot.val();              // childData will be the actual contents of the child
+	  
+	  
+	 if (key == 'author' || key =='text'  || key =='timestamp' || key =='count_like' || key== 'count_comment')
+	  {
+	  document.getElementById(element_data_key_mapping[key]).innerHTML = value;
+	  }
+	
+  });
+ });
+ };
+ 
+ 
+
+</script>
+
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+
+</style>
+<body class="w3-theme-l5">
+
+<!--header-->
+<div class="header">
+<a href="index.html"> <img  src="logo25.png" ></a>
+  <a href="#default" class="logo">Kriger Campus <hr><h4 style="display:inline;">   India's Education Network</h4> </a>
+<form action="/action_page.php">
+  <input type="text" placeholder="Search..">
+<button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  <div class="header-right">
+    <a class="active" href="#home">Posts</a>
+    <a href="#contact">Profiles</a>
+    
+  </div>
+</div>
+<div style="padding-left:20px">
+ 
+</div>
+<!-- Page Container -->
+<!-- timeline posts -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px"> 
+<div class="w3-row">
+<div class="abc w3-card  w3-white w3-round w3-margin unique w3-half">
+<a href="#"><img  id="img" src="avatar.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px"></a>
+        <span  id="time" class="w3-right w3-opacity">1 min</span>
+        <a id="username" href="#"><h4>name</h4></a><br>
+        <hr class="w3-clear">
+        <p id="posttext">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <div class="w3-row-padding" style="margin:0 -16px">
+           
+            
+             
+         
+        </div>
+
+</div>
+<div>
+<div class= "efg w3-card  w3-white w3-round w3-margin unique w3-half">
+
+<a href="#"><img id="img" src="avatar.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px"></a>
+        <span class="w3-right w3-opacity">1 min</span>
+        <a id="username" href="#"><h4>name</h4></a><br><hr>
+		        <button  type="button" style="float:left" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i></button><p id="likecount"></p> 
+				<a href="#"><img src="avatar.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:25px"></a>
+<a href="#"><img id="img" src="avatar.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:25px"></a>
+<a href="#"><img  id="img"src="avatar.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:25px"></a>
+
+				
+				
+				
+				
+				<br><br>
+        <button type="button" id="comment" style="float:left"class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i></button>
+	<p id="com"></p>
+		
+		
+</div>
+</div>
+	  
+      
+      
+      
+      
+      
+     
+
+
+
+
+
+
+ 
+<script>
+
+
+
+// Used to toggle the menu on smaller screens when clicking on the menu button
+function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+</body>
+</html> 
