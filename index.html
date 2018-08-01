@@ -15,7 +15,7 @@
 <script>
   // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyD9Um_Z_BUxXOQkr4kyUpH72PYfBeV20yY",
+    apiKey: "",
     authDomain: "kriger-website.firebaseapp.com",
     databaseURL: "https://kriger-website.firebaseio.com",
     projectId: "kriger-website",
@@ -32,15 +32,14 @@
    var database= firebase.database();
    var userDataRef = firebase.database().ref("Posts/-LEQBhJuwuJ9SlLu9H4L").orderByKey();
  window.onload = function(e){ 
-userDataRef.once("value")
-  .then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-	   element_data_key_mapping = {
-	    "author": "username",
-		"text": "posttext",
-		"count_comment":"com",
-		"count_like":"likecount",
-		"timestamp":"time"
+          userDataRef.once("value").then(function(snapshot) {
+                               snapshot.forEach(function(childSnapshot) {
+	                             element_data_key_mapping = {
+	                                  "author": "username",
+		                            "text": "posttext",
+		                           "count_comment":"com",
+		                           "count_like":"likecount",
+		                           "timestamp":"time"
 		
 		
 		
@@ -76,14 +75,14 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 <a href="index.html"> <img  src="logo25.png" ></a>
   <a href="#default" class="logo">Kriger Campus <hr><h4 style="display:inline;">   India's Education Network</h4> </a>
 <form action="/action_page.php">
-  <input type="text" placeholder="Search..">
-<button type="submit"><i class="fa fa-search"></i></button>
+         <input type="text" placeholder="Search..">
+         <button type="submit"><i class="fa fa-search"></i></button>
     </form>
   <div class="header-right">
-    <a class="active" href="#home">Posts</a>
-    <a href="#contact">Profiles</a>
+        <a class="active" href="#home">Posts</a>
+       <a href="#contact">Profiles</a>
     
-  </div>
+ </div>
 </div>
 <div style="padding-left:20px">
  
