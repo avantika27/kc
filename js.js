@@ -1,12 +1,12 @@
 
   // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyD9Um_Z_BUxXOQkr4kyUpH72PYfBeV20yY",
+    apiKey: "",
     authDomain: "kriger-website.firebaseapp.com",
     databaseURL: "https://kriger-website.firebaseio.com",
     projectId: "kriger-website",
     storageBucket: "kriger-website.appspot.com",
-    messagingSenderId: "246030514172"
+    messagingSenderId: ""
   };
   firebase.initializeApp(config);
 
