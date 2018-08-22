@@ -6,5 +6,5 @@ it contains following files with their respective functions </br>
 3)style2.css- css file styling rest of section of the page.</br>
 4)avatar.jpg- sample image.</br>
 5)kclogo2.png-for logo.</br>
-6)profile.html -  for individual profiles of people with their details, friendlist, posts they have done.
+6)profile.html -  for individual profiles of people with their details, friendlist, posts they have done.</br>
 7)js2.js- script for index page.
