@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<title>Kriger Campus</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style2.css">
+<!--theme-->
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+<!--font-->
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="css/style.css">
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+ // Initialize Firebase
+ var config = {
+    apiKey: "",
+    authDomain: "kriger-website.firebaseapp.com",
+    databaseURL: "https://kriger-website.firebaseio.com",
+    projectId: "kriger-website",
+    storageBucket: "kriger-website.appspot.com",
+    messagingSenderId: "246030514172"
+  };
+  firebase.initializeApp(config);
+
+</script>
+
+		 
+		
+
+
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
+
+</style>
+ <body class="w3-theme-l5">
+
+<!--header-->
+<div class="header">
+<a href="index.html"> <img  src="kclogo2.png" ></a>
+  <a href="#default" class="logo">Kriger Campus <hr><h4 style="display:inline;">   India's Education Network</h4> </a>
+<form action="/action_page.php">
+  <input type="text" placeholder="Search..">
+<button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  <div class="header-right">
+    <a href="index.html">Posts</a>
+    <a href="#contact" class="active">Profiles</a>
+    
+  </div>
+</div>
+<div style="padding-left:20px">
+ 
+</div>
+
+
+
+<!-- for profiles-->
+<div class="profile_here"></div>
+<script>
+// getting parameters
+var uid1="";
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+ }  
+}
+
+
+var name1 = getUrlParameter('name');
+var uid1=  getUrlParameter('id');
+
+//console.log(name1);
+// console.log(uid1);
+// for dp, name,bio 
+firebase.database().ref('/UserDetails/'+uid1).once('value').then(snapshot3=>{
+	 var homet="";
+	name_again = snapshot3.child("name").val();
+	
+	if (snapshot3.child("headline").exists()){
+	bio= snapshot3.child("headline").val();
+	var html13=  '<i class="fa fa-quote-left fa-fw w3-margin-right w3-text-theme"></i>'+bio+ '<i class="fa fa-quote-right fa-fw w3-margin-right w3-text-theme"></i>';
+		        $("#headline-here").empty().append(html13);
+	}
+	dp= snapshot3.child("thumb").val();
+		$(".profile_here").append('<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px"><div class="w3-row"><div class="w3-col m8"><div class="w3-card w3-round w3-white"><div class="w3-container"><p><img src=' +dp+' class="w3-round-xxlarge" style="height:120px;width:120px" alt="Avatar"><a id="username" href="#"><h3 class="w3-center">'+name_again +'</h3></p></a></p><hr><p ><div id="headline-here"><i class="fa fa-quote-left fa-fw w3-margin-right w3-text-theme"></i>headline-here.....<i class="fa fa-quote-right fa-fw w3-margin-right w3-text-theme"></i></div></p><p ><div id= "school_here" ><i class="fa fa-university fa-fw w3-margin-right w3-text-theme"></i> school :not yet mentioned</div></p><p ><div id= "college12" ><i class="fa fa-graduation-cap fa-fw w3-margin-right w3-text-theme"></i> college :not yet mentioned</div></p><p > <div id= "home"><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> hometown:not yet mentioned</div></p><p > <div id= "states"><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> state :not yet mentioned</div></p><p > <div id= "country_here"><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>country :not yet mentioned</div></p><p > <div id= "award"><i class="fa fa-trophy fa-fw w3-margin-right w3-text-theme"></i> awards :not yet mentioned</div></p><p > <div id= "certificate_here"><i class="fa fa-certificate fa-fw w3-margin-right w3-text-theme"></i> certificate :not yet mentioned</div></p><p ><div id= "internship_here" ><i class="fa fa-buildig-o fa-fw w3-margin-right w3-text-theme"></i> internship :not yet mentioned</div></p></div></div><br><h3 class="w3-center"><u><strong> '+name_again+'     POST</strong> </u></h3></div><div class="w3-col m2"><div class="w3-card w3-round w3-white w3-center"><div class="w3-container"><p><strong>You may also visit:</strong></p><hr><table class="frnlists"></table></div></div><br></div><div class="posts_here"></div></div>');
+// for hometown, country,state, college, awards, certificate,school, itership
+firebase.database().ref('/Users/'+uid1+ '/info/').once('value').then(snapshot4=>{
+				// for hometown
+				if (snapshot4.child("hometown").exists()){
+				homet= snapshot4.child("hometown").val();
+		        var html14=  '<i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>home town:'+homet;
+		        $("#home").empty().append(html14);
+				}
+				 // for country
+				 if (snapshot4.child("country").exists()){
+				country1= snapshot4.child("country").val();
+		        var html15=  '<i class="fa fa-flag fa-fw w3-margin-right w3-text-theme"></i>country:'+country1;
+		        $("#country_here").empty().append(html15);
+				}
+		         // for state
+				 if (snapshot4.child("state").exists()){
+		         state1= snapshot4.child("state").val();
+		          var html16=  '<i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i>state:'+state1;
+		          $("#states").empty().append(html16);
+				 } 
+				 			 
+
+			
+		//college
+		
+			 if (snapshot4.child("college").exists()){
+	var	test = snapshot4.child("college").val();
+			// console.log( test);
+			 var clg_namef = test[0].name;
+			//  console.log(clg_namef );
+			  
+			  var degree_namef = test[0].degree;
+			// console.log(degree_namef );
+			 var yearsf = test[0].year;
+			// console.log(yearsf );
+			 var html17=  '<i class="fa fa-graduation-cap fa-fw w3-margin-right w3-text-theme"></i>college:'+clg_namef+'     Degree: '+degree_namef+     '     years:  '+yearsf+'<br>';
+		$("#college12").empty().append(html17);
+		if (snapshot4.child("college").child(1).exists()){
+		var clg_name = test[1].name;
+			//  console.log(clg_name);
+			  
+			  var degree_name = test[1].degree;
+			// console.log(degree_name );
+			 var years = test[1].year;
+			// console.log(years );
+			 var html17=  '<i class="fa fa-graduation-cap fa-fw w3-margin-right w3-text-theme"></i>college:'+clg_name+'     Degree: '+degree_name+     '     years:  '+years+'<br>';
+		$("#college12").append(html17);
+		}
+			 
+			};
+			// for awards
+			if (snapshot4.child("awards").exists()){
+	var	test1 = snapshot4.child("awards").val();
+			// console.log(test1);
+			 var award_namef = test1[0].name;
+			//  console.log(award_namef);
+			  
+			  var award_description = test1[0].description;
+			// console.log(award_description );
+			 var award_years = test1[0].year;
+			// console.log(award_years );
+			 var html18=  '<i class="fa fa-trophy fa-fw w3-margin-right w3-text-theme"></i>awards:'+award_namef+'     , '+award_description+     '<br>';
+		$("#award").empty().append(html18);
+			
+			};
+			
+			// for certificate
+			if (snapshot4.child("certifications").exists()){
+	var	test3 = snapshot4.child("certifications").val();
+			// console.log(test3);
+			 var certificate_namef = test3[0].name;
+			//  console.log(certificate_namef);
+			  
+			 
+			 var html19=  '<i class="fa fa-certificate fa-fw w3-margin-right w3-text-theme"></i>certificate:'+certificate_namef;
+		$("#certificate_here").empty().append(html19);
+		if (snapshot4.child("certifications").child(1).exists()){
+			  var certificate_namese = test3[1].name;
+			//  console.log(certificate_names );
+			  
+			 
+			 var html19=  '<i class="fa fa-certificate fa-fw w3-margin-right w3-text-theme"></i>certificate:'+certificate_namese;
+		$("#certificate_here").append(html19); 
+		}
+			};
+            //school
+		
+			 if (snapshot4.child("school").exists()){
+	var	test4 = snapshot4.child("school").val();
+			// console.log( test4);
+			 var scul_namef = test4[0].name;
+			//  console.log(clg_namef );
+			  
+			  
+			 var syearsf = test4[0].year;
+			// console.log(yearsf );
+			 var html20=  '<i class="fa fa-university fa-fw w3-margin-right w3-text-theme"></i>school:'+scul_namef+    '     years:  '+syearsf+'<br>';
+		$("#school_here").empty().append(html20);
+		if (snapshot4.child("school").child(1).exists()){
+		var scul_name = test4[1].name;
+			//  console.log(clg_name);
+			  
+			 
+			 var syears = test4[1].year;
+			// console.log(years );
+			 var html20=  '<i class="fa fa-university fa-fw w3-margin-right w3-text-theme"></i>school:'+scul_name+'     years:  '+syears+'<br>';
+		$("#school_here").append(html20);
+		}
+			 
+			};
+//internship
+		
+			 if (snapshot4.child("internships").exists()){
+	var	test5 = snapshot4.child("internships").val();
+			// console.log( test5);
+			 var internship_namef = test5[0].name;
+			//  console.log(clg_namef );
+			  
+			 
+			 var iyearsf = test5[0].year;
+			// console.log(yearsf );
+			 var html21=  '<i class="fa fa-building-o fa-fw w3-margin-right w3-text-theme"></i>internship:'+internship_namef+'          years:  '+iyearsf+'<br>';
+		$("#internship_here").empty().append(html21);
+		if (snapshot4.child("internships").child(1).exists()){
+		var internship_names = test5[1].name;
+			//  console.log(clg_name);
+			  
+			  
+			 var years = test5[1].year;
+			// console.log(years );
+			 var html21=  '<i class="fa fa-building-o fa-fw w3-margin-right w3-text-theme"></i>internship:'+internship_names+'         years:  '+years+'<br>';
+		$("#internship_here").append(html21);
+		}
+			 
+			};			
+		
+			});
+			// for friendlist-----
+		 firebase.database().ref('/Connections/'+uid1).once('value').then(snapshot6=>{
+		count1=snapshot6.child("count").val();
+		//console.log(count1);
+		list1=snapshot6.child("list").val();
+		
+		snapshot6.child("list").forEach(function(snap6){
+			frn_uid=snap6.key;
+			//console.log(frn_uid);
+			firebase.database().ref('/UserDetails/'+frn_uid).once('value').then(snapshot7=>{
+			frn_name = snapshot7.child("name").val();
+			lfrn_uid = snapshot7.key;
+			
+			frn_dp=snapshot7.child("thumb").val();
+			html22=('<tr><td>  <a href="profile.html?id='+lfrn_uid+'&name='+frn_name+'"><img   src=' +frn_dp+' alt="Avatar" class="w3-left w3-circle w3-margin-right"  width="60" height="60"></a><td>  <a href="profile.html?id='+lfrn_uid+'&name='+frn_name+'"><h4>'+frn_name+'</h4></a></tr>');
+			$(".frnlists").append(html22);
+			  });//snapshot7  end
+				 }); //snap6 end
+		 });// snapshot6 end
+	// for posts--
+	
+		firebase.database().ref('Posts').orderByChild("uid").equalTo(uid1).once('value').then(snapshot8=>{
+			hh=snapshot8.val();
+		        snapshot8.forEach(function(snap8){
+		pname = snap8.child("author").val();
+		//console.log(ppname);
+		plike=snap8.child("count_like").val();
+		pcomment=snap8.child("count_comment").val();
+		ptext=snap8.child("text").val();
+		ptime=snap8.child("timestamp").val();
+		var pattern = /(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})/;
+		 var dt = ptime.replace(pattern,'$3-$2-$1 $4:$5:$6');
+		var pimg=""
+		html26="";
+		if (snap8.child("image_url").exists() )
+		{ pimg=snap8.child("image_url").val();
+	console.log(pimg);
+	html26=(' <br><img src='+pimg+ ' height="200px" align="center" display= "block" margin-left="auto" margin-right ="auto"');
+	
+	}
+
+		var html25 = '<div class="w3-col m8"> <div class="w3-container w3-card w3-white w3-round w3-margin"><br>';
+         html25=html25+'<img src='+dp+' alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px"> <span class="w3-right w3-opacity">';
+         html25=html25+dt+'</span>'; 
+         html25=html25+'<h4>'+pname+'</h4><br>';
+         html25=html25+'<hr class="w3-clear">';
+         html25=html25+'<p>'+ptext+ html26+'</p><p class="postimg_here"></p><div class="w3-row-padding" style="margin:0 -16px"></div>';
+         html25=html25+'<button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i> '+plike+' </button> ';
+         html25=html25+'<button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>' +pcomment+' </button> <br><br><br><br><br></div></div>';
+            $(".posts_here").append(html25);
+        
+    
+		
+		
+		
+		
+		
+		
+		
+		 });
+		 });
+		
+		 
+		 }); // outer
+		 </script>
+
+
+
+
+</body>
+</html> 
